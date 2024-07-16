@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Battle</title>
+</head>
+    <body style="background-image: url('background.png'); background-repeat: no-repeat;  background-attachment: fixed;  
+    background-size: cover;">
+            <h1 id="chooseCharacter"> Choose Your Character</h1>
+            <h1 style="display: none; font-size: xx-large;" id="victory"></h1>
+
+        <div id="wholePg">
+
+                <img src="battlefield.png" id="bttlfield">
+
+
+            <div id="container">
+                
+                <button style="background-image: url('lightning.png');" class="chooseCharacter" onclick="battleScreen('pikachu'); opponentPoke()"><img id="1" class="character" id="pika" onclick="battleScreen('pikachu'); opponentPoke()" src="pikachuHomePage.gif">Pikachu</button>
+                <button style="background-image: url('leaf.png');" class="chooseCharacter" onclick="battleScreen('bulbasaur'); opponentPoke()"><img id="2" class="character" onclick="battleScreen('bulbasaur'); opponentPoke()" src="bulbasaurHomePage.gif">Bulbasaur</button>
+                <button style="background-image: url('water.jpg');" class="chooseCharacter" onclick="battleScreen('squirtle'); opponentPoke()"><img id="3" class="character" onclick="battleScreen('squirtle'); opponentPoke()" src="squirtleHomePage.gif">Squritle</button>
+                <button style="background-image: url('fire.png');" class="chooseCharacter" onclick="battleScreen('charmander'); opponentPoke()"><img id="4" class="character" onclick="battleScreen('charmander'); opponentPoke()" src="charmanderHomePage.gif">Charmander</button>
+                <h1 id="lvl">Difficulty</h1>
+                <button id="easy">Easy</button>
+                <button id="medium">medium</button>
+                <button id="hard">Hard</button>
+                <br>
+                <br>
+                <button id="xtreme">X-treme</button>
+                <button id="random">Random</button>
+                <button id="tournement">Tournement</button>
+            </div>
+            <img class="battleCharacter" id="bigPoke" src="">
+            <h1 id="vs">VS</h1>
+            <h1 id="moveUsed"></h1>
+            <button id="ready" onclick="battleFieldSetup()">Ready</button>
+            <img class="battleCharacter" id="opponentCharacter" src="">
+            <h2 class="hp" id="oppHP">Opponent HP:</h2>
+
+                <div class="outerBar" id="oppBar">
+                    <div class="innerBar" id="oppProgress"></div>
+                </div>
+            
+            <h2 class="hp" id="yourHP"> Your HP:</h2>
+            
+                <div class="outerBar" id="yourBar">
+                    <div class="innerBar" id="yourProgress"></div>
+                </div>
+
+
+            <div id="attacks">
+                <h2>Moves</h2>
+                <br>
+                <button class="btn" id="multimove" onclick="pullMove('multimove')"><h2 id="pp1"></h2></button>
+                <br>
+                <br>
+                <button class="btn" id="multimove2" onclick="pullMove('multimove2')"><h2 id="pp2"></h2></button>
+                <br>
+                <br>
+                <button class="btn" id="multimove3" onclick="pullMove('multimove3')"><h2 id="pp3"></h2></button>
+                <br>
+                <br>
+                <button class="btn" id="multimove4" onclick="pullMove('multimove4')"><h2 id="pp4"></h2></button>
+            </div>
+
+            <div id="items">
+                <h2>Items</h2>
+                <br>
+                <button class="btn" id="potion" onclick="usePotion()">Potion<p id="numOfPotions"></p></button>
+            </div>
+        </div>
+
+        <nav id="textBoxBtm">
+            <p id="commentator"></p>
+        </nav>
+        <style>
+
+            #commentator{
+                font-size: xx-large;
+                color: white;
+            }
+
+            #textBoxBtm{
+                display: none;
+                margin-top: 7.5%;
+                width: 100%;
+                height: 200px;
+                box-shadow: 0 6rem 9rem rgba(0, 0, 0, 0.5);
+                z-index: 30;
+                background-color: #302e2e;
+                opacity: 60%;
+            }
+        </style>
+    </body>
+    <script src="attScript.js"></script>
+</html>

@@ -1,0 +1,97 @@
+    img.character{
+    width: 120px;
+    height: 120px;
+    }
+
+    #pika{
+    width: 180px;
+    }
+
+    #vs{
+    z-index: 10;
+    margin-left: 45%;
+    margin-top: -13%;
+    font-size: 100px;
+    display: none;
+    }
+
+    .battleCharacter{
+        display: none;
+        width: 450px;
+        height: 450px;
+    }
+
+    #opponentCharacter{
+        z-index: 15;
+        margin-top: -22%;
+        margin-left: 75%;
+    }
+
+    #ready{
+        background-color: green;
+        font-size: large;
+        color: white;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-radius: 45%;
+        display: none;
+        margin-left: 45%;
+    }
+
+    :hover#ready{
+        background-color: red;
+        cursor: pointer;
+    }
+
+    :hover.chooseCharacter{
+        cursor: pointer;
+    }
+
+    #bttlfield{
+        display: none;
+        height: 100%;
+        width: 75%;
+        z-index: 0;
+        margin-left: 0%;
+        margin-bottom: -50%;
+    }
+
+    #attacks{
+        margin-left: 90%;
+        margin-top: -35%;
+        display: none;
+    }
+
+    #items{
+        margin-left: 90%;
+        display: none;
+    }
+
+    .hp{
+        margin-left: 67%;
+        margin-top: 5%;
+        display: none;        
+    }
+
+    button{
+        padding: 10px 10px 10px 10px;
+    }
+
+    .outerBar{
+        margin-left: 67%;
+        display: none; 
+        height: 20px;
+        background-color: red;
+        width: 20%;
+        border-style: solid;
+        border-width: 3px;
+        border-radius: 6px;
+    }
+
+    .innerBar{
+        width: 100%;
+        background-color: green;
+        height: 20px;
+    }

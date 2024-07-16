@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Baloo Da 2' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <title>Document</title>
+    <style>
+        #buttons{
+            cursor: pointer;
+        }
+        form{
+            color: darkgoldenrod;
+            background: none;
+            font-size: 20px;
+            font-family: 'Baloo Da 2';
+        }
+
+        form input{
+            background-image: url(searchIcon.png);
+            background-position: 10px 12px;
+            background-size: 20px 20px;
+            background-repeat: no-repeat;
+            border: 2px solid darkgoldenrod;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: .8s;
+            position: relative;
+            overflow: hidden;
+            width: 10%;
+            font-size: larger;
+            height: 180%;
+            padding: 12px 20px 12px 40px;
+            font-size: 95%;
+        }
+/*         
+        form input::placeholder{
+            font-size: 85%;
+        } */
+
+        form input:hover{ 
+            width: 10%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        form input[type=text]:focus{
+            outline: none !important;
+            border: 2.5px solid darkgoldenrod;
+            width: 96.5%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        h1{
+            font-size: larger;
+            font-family: 'Baloo Da 2';
+        }
+        button {
+            border: 1px solid darkgoldenrod;
+            color: darkgoldenrod;
+            background: none;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: .8s;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        button:hover {
+            color: #fff;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        button::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 0%;
+            height: 50%;
+            background: darkgoldenrod;
+            z-index: -1;
+            transition: 0.8s;
+            top: 0;
+            height: 180%;
+        }
+
+        button:hover::before {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <input value="" type="text" placeholder="Search for a game..." onkeyup="lookThru()" title="Search" id="search">
+      </form>      
+    <br>
+    <br>
+    <br>
+    <div id="buttons">
+        <button onclick="location.href = 'C:/Users/seyth/OneDrive/Documents/Games/2048/index.html';"> <h1>2048</h1>  </button>
+        <button onclick="location.href = 'C:/Users/seyth/OneDrive/Documents/Games/mapGame/choose-your-map.html';"> <h1>Find The Treasure</h1>  </button>
+        <button onclick="location.href = 'C:/Users/seyth/OneDrive/Documents/Games/PokemonGameSeythShayShail/homeScreen.html';"> <h1>Pokemon Battle</h1>  </button>
+        <button onclick="location.href = 'C:/Users/seyth/OneDrive/Documents/Games/Wordle/wordle.html';"> <h1>Wordle</h1>  </button>
+    </div>
+    <div id="val"></div>
+    <script>
+        function lookThru() {
+            var numOfGames = 4;
+            var inputVal = document.getElementById("search");
+            var filter = inputVal.value.toUpperCase();
+            var btn = document.getElementsByTagName('button')
+            console.log('run')
+               
+            for (let x = 0; x < numOfGames; x++) { 
+                var capsVal = btn[x].innerText.toUpperCase();    
+                if (capsVal.includes(filter) == false) {
+                        btn[x].style.display='none';   
+                    }else{
+                        btn[x].style.display = 'block';
+                    }
+            }
+        }
+    </script>
+</body>
+
+</html>
