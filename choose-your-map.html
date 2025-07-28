@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>
+            choose your map
+            </title>
+        </head>
+        <body>
+            <h1>choose your map</h1>
+            <img src="https://nostarch.com/images/treasuremap.png" onclick="map1()" id="map1">
+            <img height="400" src="treasure-map.jpg" onclick="map2()" id="map2">
+            <script>
+            $("#map2").css("float","left")
+            $("#map1").css("float","right")
+                function map1(){
+                window.location.assign("treasure.html")
+                }
+                function map2(){
+                window.location.assign("treasure2.html")
+                }
+                </script>
+            </body>
+</html>

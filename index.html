@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        input {
+            width: 300px;
+            height: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        button {
+            width: 75px;
+            margin-top: 20px;
+            margin-left: 10px;
+            padding: 10px;
+            display: inline-block;
+            cursor: pointer;
+            color: #fff;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px #999;
+            transition-duration: 0.4s;
+        }
+
+        button:hover {
+            background-color: #f44336;
+        }
+
+        button:active {
+            background-color: #3e8141;
+            box-shadow: 0 2px #666;
+            transform: translateY(4px);
+        }
+
+        #happyfathersday {
+            font-size: 8rem;
+            margin-left: 19%;
+            font-family: 'Baloo Da 2', serif;
+        }
+
+        h1 {
+            font-family: 'Baloo Da 2', serif;
+        }
+    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Josefin+Slab:ital,wght@0,400;0,600;1,300;1,400;1,600&family=Mulish:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag!</title>
+</head>
+
+<body id="body" style="background-color: #696969;">
+
+    <input type="number" placeholder="Enter Blue's speed multiplier              ">
+    <br>
+    <input type="number" placeholder="Enter Orange's speed multiplier            ">
+    <br>
+    <input type="number" placeholder="Enter amount of time orange has to run away for">
+    <br>
+    <button id="submit" onclick="init()">Submit</button>
+
+    <p id="happyfathersday">Tag!!! Blue's It!</p>
+
+
+    <canvas id="canvas" width="2000px" height="945px"
+        style="background-image: url(bckground.png); display: none;"></canvas>
+
+    <h1 style="display: none;"></h1>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+
+        var timeLeft = 60;
+        var youspeed = 5;
+        var mespeed = 5;
+
+        function init() {
+            var inputs = document.getElementsByTagName("input")
+            timeLeft = parseInt(inputs[2].value);
+            youspeed = youspeed * parseFloat(inputs[0].value);
+            mespeed = mespeed * parseFloat(inputs[1].value);
+            for (let i = 0; i < 3; i++) {
+                inputs[i].style.display = 'none';
+                document.getElementsByTagName('br')[i].style.display = 'none';
+            }
+            document.getElementById('submit').style.display = 'none';
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('happyfathersday').style.display = 'none';
+            runGame();
+        }
+
+        function runGame() {
+            var canvas = document.getElementById('canvas');
+
+            canvas.style.width = document.documentElement.clientWidth - 8 + 'px';
+            canvas.style.height = document.documentElement.clientHeight - 10 + 'px';
+
+            var ctx = canvas.getContext("2d");
+            var youx = 200;
+            var youy = 200;
+            var mex = screen.width - 100;
+            var mey = window.innerHeight - 100;
+
+            ctx.fillStyle = "blue";
+            ctx.beginPath();
+            // for the arc function, the coordinates (x, y) are for the center of the circle
+            ctx.arc(youx, youy, 40, 90, Math.PI * 2, true);
+            ctx.fill();
+
+
+            ctx.fillStyle = "orange";
+            ctx.beginPath();
+            ctx.arc(mex, mey, 40, 90, Math.PI * 2, true);
+            ctx.fill();
+
+            setInterval(() => {
+                ctx.strokeStyle = "Turquoise";
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(screen.width, window.innerHeight);
+                ctx.lineTo(screen.width, 0);
+                ctx.moveTo(screen.width, window.innerHeight);
+                ctx.lineTo(0, window.innerHeight);
+                ctx.stroke();
+            }, 100);
+
+
+
+            let gameOver = setInterval(() => {
+                if (mex < youx + 80 && mex > youx - 80 && mey < youy + 80 && mey > youy - 80) {
+                    alert("Game Over")
+                    alert("The winner is ...")
+                    alert("Blueeeee!!!!")
+                    console.log("Blue Wins!!!")
+                    clearInterval(gameOver)
+                    clearInterval(timer)
+                    document.getElementsByTagName('h1')[0].style.display = 'block';
+                    document.getElementsByTagName('h1')[0].innerText = 'Blue Wins';
+                    document.getElementsByTagName('h1')[0].style.color = 'blue';
+                }
+            }, 1);
+
+            let timer = setInterval(() => {
+                if (timeLeft == 1) {
+                    alert("Time's Up")
+                    alert("Game Over")
+                    alert("The winner is ...")
+                    alert("Orangeeeee!!!!")
+                    console.log("Orange Wins!!!")
+                    clearInterval(gameOver)
+                    clearInterval(timer)
+                    document.getElementsByTagName('h1')[0].style.display = 'block';
+                    document.getElementsByTagName('h1')[0].innerText = 'Orange Wins';
+                    document.getElementsByTagName('h1')[0].style.color = 'Orange';
+                } else {
+                    timeLeft -= 1
+                }
+            }, 1000);
+
+            // button --> keycode
+            // left --> 37
+            // right --> 39
+            // up --> 38
+            // down --> 40
+            // clearReact(x,y,w,h)
+            // arc(x, y, r, start angle, # of radians, (counter)clockwise), true => clockwise, flase => counterclockwise
+
+            const keysDown = {};
+            let loopintervalBlue;
+            let loopintervalOrange;
+            let interval = 10;
+            let bluekeys = ['ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown'];
+            let orangekeys = ['w', 'a', 's', 'd'];
+
+
+            function areNonePressed(keys) {
+                return keys.every(key => !keysDown[key]);
+                // key is the object in the list that is checked in keysDown. We're just trying to see if the item exists in keysDown
+            }
+
+            $("body").on('keyup', function (e) {
+                delete keysDown[e.key];
+
+
+                if (areNonePressed(orangekeys) && loopintervalOrange) {
+                    clearInterval(loopintervalOrange);
+                    loopintervalOrange = null;
+                }
+            });
+
+            $("body").on('keyup', function (e) {
+                delete keysDown[e.key];
+
+                // Stop loop if no keys are being held
+                if (areNonePressed(bluekeys) && loopintervalBlue) {
+                    clearInterval(loopintervalBlue);
+                    loopintervalBlue = null;
+                }
+
+            });
+
+            $("body").on('keydown', function (button) {
+                keysDown[button.key] = true;
+
+                if (!loopintervalOrange) {
+                    loopintervalOrange = setInterval(() => {
+
+                        ctx.clearRect(mex - 40, mey - 40, 80, 80);
+
+                        // left
+                        if (keysDown['a'] && mex > 40) {
+                            mex -= mespeed;
+                        }
+                        // up
+                        if (keysDown['w'] && mey > 40) {
+                            mey -= mespeed;
+                        }
+                        // right
+                        if (keysDown['d'] && mex < screen.width - 40) {
+                            mex += mespeed;
+                        }
+                        // down
+                        if (keysDown['s'] && mey < window.innerHeight - 40) {
+                            mey += mespeed;
+                        }
+
+                        ctx.fillStyle = "orange"
+                        ctx.beginPath();
+                        ctx.arc(mex, mey, 40, 90, Math.PI * 2, true);
+                        ctx.fill();
+
+                    }, interval);
+                }
+
+            });
+
+            // BLUE
+            $("body").on('keydown', function (button) {
+                keysDown[button.key] = true;
+
+                if (!loopintervalBlue) {
+                    loopintervalBlue = setInterval(() => {
+
+                        ctx.clearRect(youx - 40, youy - 40, 80, 80);
+
+                        // left
+                        if (keysDown['ArrowLeft'] && youx > 40) {
+                            youx -= youspeed;
+                        }
+                        // up
+                        if (keysDown['ArrowUp'] && youy > 40) {
+                            youy -= youspeed;
+                        }
+                        // right
+                        if (keysDown['ArrowRight'] && youx < screen.width - 40) {
+                            youx += youspeed;
+                        }
+                        // down
+                        if (keysDown['ArrowDown'] && youy < window.innerHeight - 40) {
+                            youy += youspeed;
+                        }
+
+                        ctx.fillStyle = "blue";
+                        ctx.beginPath();
+                        ctx.arc(youx, youy, 40, 90, Math.PI * 2, true);
+                        ctx.fill();
+
+
+                    }, interval);
+                }
+            });
+        }
+
+
+
+    </script>
+</body>
+
+</html>

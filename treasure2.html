@@ -1,0 +1,124 @@
+<html>
+    <head>
+        <title>Find the burried treasure</title>
+        <link rel = 'shortcut icon' type = 'image/gif' href = 'https://nostarch.com/images/treasuremap.png'></link>
+        </head>
+        <body>
+            <h1 id="heading">Find the burried treasure</h1>
+            
+            <div id="text_div">
+                <h2>Clicks Left</h2>
+                <h2 id="remaining">300</h2>
+                <h2 id="distance">Unknown</h2>
+            </div>
+            <img id="map" width="800" height="500" src="treasure-map.jpg"><h1 id="game-over"></h1>
+
+            <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+            <script>
+                // var return_val = play();
+                //while (true)
+                //{
+                    play();
+                //}
+                
+                function play(){
+                var getRandomNumber = function(size) {
+                    return Math.floor(Math.random() * size);
+                };
+
+                var getDistance = function(event,target){
+                    var diffX = event.offsetX - target.x;
+                    var diffY = event.offsetY - target.y;
+                    return Math.sqrt((diffX*diffX)+(diffY*diffY));
+                };
+
+                var getDistancehint = function(distance){
+                    if (distance<10){
+                        return "boiling hot!";
+                    }else if (distance<20){
+                        return "really hot!";
+                    }else if (distance<40){
+                        return "hot";
+                    }else if (distance<80){
+                        return "warm";
+                    }else if (distance<160){
+                        return "cold";
+                    }else if (distance<360){
+                        return "really cold!";
+                    }else{
+                        return "freezing";
+                    }
+                }
+                var width = 800;
+                var height = 500;
+                var clicks = 0;
+
+                var target = {
+                    x: getRandomNumber(width),
+                    y: getRandomNumber(height)
+                };
+                $("#text_div").offset({ top: 50, left: 5 });
+                $("#text_div").width(120);
+                $("#text_div").css('border-width', "3px");
+                $("#text_div").css('border-color', "black");
+                $("#text_div").css('border-style', "solid");
+                $("#remaining").css("color", "gray");
+                $("#map").offset({ top: 50, left: 150});
+                $("#map").css('float','left');
+                $("#map").click(function(event){
+                    clicks++;
+                    console.log(clicks)
+
+                    var distance = getDistance(event, target);
+
+                    var distancehint = getDistancehint(distance);
+                    
+                    if (distancehint == "boiling hot!" || distancehint == "really hot!")
+                    {
+                        $("#distance").css("color", "red");
+                    } else if (distancehint == "really cold!" || distancehint == "freezing")
+                    {
+                        $("#distance").css("color", "blue");
+                    } else {
+                        $("#distance").css("color", "black");
+                    }
+                    $("#distance").text(distancehint);
+
+                    //var retry = false;
+                    if(distance < 8){
+                        alert("You found the treasure in " + clicks + " clicks!");
+                        clicks=0;
+                        target = {
+                            x: getRandomNumber(width),
+                            y: getRandomNumber(height)
+                        };
+                        $("#distance").text("Unknown").css("color","black");
+
+                        //  retry = confirm("do you wat to try again")
+                    };
+                    /*if (retry){
+                        retry1();
+                    }else{
+                        $("body").css("display","none").append("Play againg soon");
+                    };*/
+                    if(clicks == 300){
+                        $("#map").fadeOut(3000)
+                        //$("#game-over").text("game over!");
+                        // $("#distance").fadeOut(300);
+                        $("#map").fadeOut(300);
+                        //$("#heading").fadeOut(300);
+                        alert("Game Over!! Press OK to restart");
+                        clicks=0;
+                        target = {
+                            x: getRandomNumber(width),
+                            y: getRandomNumber(height)
+                        };
+                        $("#map").fadeIn(1500);
+                        $("#distance").text("Unknown").css("color","black");
+                    }
+                    $("#remaining").text(300 - clicks);
+                });};
+            </script>
+        </body>
+    </html>
